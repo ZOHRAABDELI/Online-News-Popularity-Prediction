@@ -1,6 +1,5 @@
 # Machine Learning Project Report: Online News Popularity (Regression)
 
-*UCI Heart Disease (Online News Popularity (Regression)* - **Note:** The title seems to combine two distinct projects. This README focuses on the "Online News Popularity (Regression)" part as detailed in the document.
 
 **Date:** May 17, 2025
 
