@@ -49,7 +49,7 @@ Beyond the statistical analysis, initial exploration yielded several qualitative
 Analysis of the target variable, `shares`, revealed a highly skewed distribution. A large majority of articles have a low number of shares, while a small subset receives significantly higher share counts, forming a long tail. This severe positive skewness is clearly depicted in the histogram of the target variable (Figure 1). Similar skewness was also evident in the distributions of many other features (Figure 2). Descriptive statistics for `shares` highlight this challenge: a mean of approximately $3349$, a median of $1400$, a $75^{th}$ percentile of $2700$, and a maximum exceeding $663,000$, indicating a wide range and the presence of numerous outliers.
 
 **Figure 1: Distribution of Shares**
-![Distribution of Shares](shares_distribution.png)
+![Distribution of Shares](images/shares_distribution.png)
 
 **Figure 2: Distribution of Various Features**
 ![Distribution of Various Features](distribution.png)
