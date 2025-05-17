@@ -52,40 +52,40 @@ Analysis of the target variable, `shares`, revealed a highly skewed distribution
 ![Distribution of Shares](images/shares_distribution.png)
 
 **Figure 2: Distribution of Various Features**
-![Distribution of Various Features](distribution.png)
+![Distribution of Various Features](images/distribution.png)
 
 **Figure 3: Distribution of Shares After Log Transformation**
-![Distribution of Shares After Log Transformation](shares_with_log.png)
+![Distribution of Shares After Log Transformation](images/shares_with_log.png)
 
 Temporal analysis showed distinct patterns in publication frequency and popularity. Article publication is highest on weekdays, particularly Wednesday and Tuesday, with significantly fewer articles published on weekends (Figure 4). Correspondingly, the total number of shares broadly align with this, with weekdays accumulating more shares than individual weekend days (Figure 5).
 
 **Figure 4: Number of Articles Published Per Day**
-![Number of Articles Published Per Day](numberOfArticles_data.png)
+![Number of Articles Published Per Day](images/numberOfArticles_data.png)
 
 **Figure 5: Total Shares Per Day of Week**
-![Total Shares Per Day of Week](shares_date.png)
+![Total Shares Per Day of Week](images/shares_date.png)
 
 An examination of content categories revealed that the 'World', 'Tech', 'Entertainment', and 'Business' channels published the most articles (Figure 6). However, in terms of total shares, the 'Tech' and 'Entertainment' lead in total shares, suggesting higher average popularity in these categories compared to others with similar or higher publication rates (Figure 7). LDA topic analysis also indicated that the dominant topic is associated with varying average share counts (Figure 8).
 
 **Figure 6: Number of Articles Published Per Category**
-![Number of Articles Published Per Category](articles_per_category.png)
+![Number of Articles Published Per Category](images/articles_per_category.png)
 
 **Figure 7: Total Shares Per Content Type**
-![Total Shares Per Content Type](shares_per_category.png)
+![Total Shares Per Content Type](images/shares_per_category.png)
 
 **Figure 8: Average Shares by Dominant LDA Topic**
-![Average Shares by Dominant LDA Topic](LDA.png)
+![Average Shares by Dominant LDA Topic](images/LDA.png)
 
 A correlation heatmap (Figure 9) provided an overview of feature relationships. While some features were correlated with each other, linear correlations between most individual features and the target variable (`shares`) were generally low. Keyword statistics (e.g., `kw_max_avg`, `kw_avg_avg`) and self-reference shares (`self_reference_avg_sharess`) showed some of the relatively stronger positive linear relationships, though these were still moderate. Scatter plots of textual features and topic purity against shares further illustrated the complex, often non-linear, relationship with popularity, particularly for high-share articles (Figure 10, Figure 11).
 
 **Figure 9: Correlation Matrix Heatmap of All Features**
-![Correlation Matrix Heatmap of All Features](heatmap_of_all.png)
+![Correlation Matrix Heatmap of All Features](images/heatmap_of_all.png)
 
 **Figure 10: Textual Features vs Shares**
-![Textual Features vs Shares](scatter-plotwithtarget.png)
+![Textual Features vs Shares](images/scatter-plotwithtarget.png)
 
 **Figure 11: Topic Purity vs Shares**
-![Topic Purity vs Shares](topic-purity.png)
+![Topic Purity vs Shares](images/topic-purity.png)
 
 Overall, the EDA revealed the inherent challenges of predicting the exact number of shares, primarily due to the target variable's severe skewness and the complex, often non-linear, relationships between features and popularity.
 
@@ -138,7 +138,7 @@ The regression models were evaluated on the test set using MAE, MSE, RMSE, and $
 When evaluating the models using MSE and $R^2$ directly on the log-transformed shares target (using the results from Figure 12), the error magnitudes were significantly smaller compared to the original scale. For example, MSE values ranged from approximately $0.74$ to $1.48$, and some models achieved positive $R^2$ values, albeit low ones (e.g., Random Forest at $0.14$, Bayesian Ridge and Linear Regression at $0.13$, SVM at $0.11$). This suggests that the models were able to capture some variance in the transformed target space, which has a more normalized distribution.
 
 **Figure 12: Model Performance Metrics on Log-Transformed Scale**
-![Model Performance Metrics on Log-Transformed Scale](results_with_log_transformation.png)
+![Model Performance Metrics on Log-Transformed Scale](images/results_with_log_transformation.png)
 
 #### Performance on Original Scale (after Transformation)
 
@@ -159,7 +159,7 @@ Evaluating the models on the original target scale after training with Yeo-Johns
 As observed from the results in Table 1 and visually represented in the bar charts (Figure 13), the **Decision Tree Regressor performed significantly worse** than all other models across all metrics (MAE, MSE, RMSE, $R^2$). Its errors were roughly twice as high as the next worst models, and its $R^2$ value was highly negative.
 
 **Figure 13: Test Set Performance Metrics (Original Scale)**
-![Test Set Performance Metrics (Original Scale)](final_result_with_yoe_transformation.png)
+![Test Set Performance Metrics (Original Scale)](images/final_result_with_yoe_transformation.png)
 
 Among the remaining six models, performance was relatively similar, although some minor distinctions can be made:
 
@@ -177,7 +177,7 @@ When trained and evaluated on data processed with **Yeo-Johnson transformation**
 Tuning was **also performed using data prepared with Log transformation** (Figure 14). For example, tuning for an SVR with a 'linear' kernel resulted in a Validation MAE of approximately $2317.5$ (when evaluated on the original scale).
 
 **Figure 14: Example GridSearchCV Output for SVR Tuning (Log Transformation)**
-![Example GridSearchCV Output for SVR Tuning (Log Transformation)](Screenshot 2025-05-17 132023.png)
+![Example GridSearchCV Output for SVR Tuning (Log Transformation)](images/Screenshot 2025-05-17 132023.png)
 
 These tuning efforts demonstrate that while hyperparameter optimization was conducted for SVR under different transformation strategies, the resulting models consistently showed similar performance levels when evaluated on the original shares scale. This further reinforces the observation that accurately predicting the precise, highly variable share count remains a significant challenge regardless of the specific transformation or SVR parameters used.
 
@@ -188,7 +188,7 @@ Comparing the error metrics (MAE, RMSE) on the original scale to the descriptive
 The scatter plot of Actual vs. Predicted shares for the SVM model (Figure 15) visually confirms the models' limitations on the original scale. It shows that even the model with the lowest MAE primarily predicts within a relatively narrow range of low share counts, failing to accurately predict the articles with high or very high numbers of shares. This inability to capture and predict the viral content, which contributes significantly to the overall variance and the long tail of the distribution, is the main reason for the high error metrics and the low/negative $R^2$ values when evaluating on the original scale.
 
 **Figure 15: Actual vs. Predicted Shares for SVM (Original Scale)**
-![Actual vs. Predicted Shares for SVM (Original Scale)](results.png)
+![Actual vs. Predicted Shares for SVM (Original Scale)](images/results.png)
 
 ### Conclusion
 
